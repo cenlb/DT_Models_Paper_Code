@@ -20,4 +20,5 @@ Note: this is not an ideal implementation of MC_cubed!
 compile with
   
 g++ -std=c++11 -o wssv wssv.cc
+  
 g++ -std=c++11 -o wssv_SEIR wssv_SEIR.cc  

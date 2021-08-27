@@ -1,7 +1,10 @@
 # DT_Models_Paper_Code
 Code accompanying "When and why direct transmission models can be used for environmentally persistent pathogens"
 
-##MC_cubed_sampler 
+## data
+Python pickles of simulated data sets used in Section 3 of paper.
+
+## MC_cubed_sampler 
 
 Contains Python3 code to sample from posterior $p( \beta, \deta, \mathbf{t}^E | \mathbf{t}^I, \mathbf{t}^R ) $.  
 $\delta$'s marginal posterior can be written down, so no need to sample.
@@ -10,4 +13,11 @@ Marginal posterior for $\beta$ obtained after running sampler then drawing from 
 
 While burning in, stdout shows scale parameter for proposal density.  After burning in, stdout shows information on chain switches.
 
-Note: this is not an ideal implementation of MC_cubed!  Instead see
+Note: this is not an ideal implementation of MC_cubed!
+  
+## wssv_simulation
+ 
+compile with
+  
+g++ -std=c++11 -o wssv wssv.cc
+g++ -std=c++11 -o wssv_SEIR wssv_SEIR.cc  

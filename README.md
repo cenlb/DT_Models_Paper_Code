@@ -1,12 +1,14 @@
 # DT Models Pape Code
 Code accompanying "When and why direct transmission models can be used for environmentally persistent pathogens"
 
-## data
-Python pickles of simulated data sets used in Section 3 of paper.
+## Data
+Python pickles and .txt files containing simulated data sets used in Section 3 of paper.
 
 ## MC cubed sampler 
 
-Contains Python3 code to sample from posterior
+Python3 implementation of MC cubed (*Parallel Metropolis coupled Markov chain Monte Carlo for Bayesian phylogenetic inference, Altekar, Dwarkadas, Huelsenbeck & Ronquist, 2003*)
+
+to sample from posterior
 
 <img src="https://render.githubusercontent.com/render/math?math=p( \beta, \delta, \mathbf{t}^E | \mathbf{t}^I, \mathbf{t}^R )">.  
 
@@ -20,16 +22,17 @@ then drawing
 
 <img src="https://render.githubusercontent.com/render/math?math=\beta \sim \Gamma( m \text{ plus } \nu_{\beta} \text{ minus } 1, A \text{ plus } \lambda_{\beta} )">
 
-
-(A in output file "A_<suffix>.txt").
-  
-Set parameters in sample_parallel.py to adjust block size (number of iterations between attempted chain switches) and blocks to burn-in, etc.
+Set parameters in `sample_parallel.py` to adjust block size (number of iterations between attempted chain switches) and blocks to burn-in, etc.
 
 While burning in, stdout shows scale parameter for proposal density.  After burning in, stdout shows information on chain switches.
 
-Note: this is not an ideal implementation of MC_cubed!
+Note: this is not an ideal implementation of MC_cubed, for example, all chains wait at switch points, regardless of whether they are switch candidates!
   
-## wssv_simulation
+## SEIR / SEIR-P simulation
+  
+`simulate.py` implements full Doob-Gillespie to simulate SIR / SIR-P / SEIR / SEIR-P processes.  Set `E_` and `I_` definitions to draw required exposed and infectious lifetime distributions.
+  
+`wssv.cc` does the same (and more) but much faster. Approximates the hazard function by discretising and forward simulateing pathogen load exactly using one draw from a binomial and one draw from a Poission distribution at each time step.  For approximation to be accurate, set time step to a suitably small value (one order of magnitude small than pathogen's mean lifetime should do it).  
  
 compile with
   
